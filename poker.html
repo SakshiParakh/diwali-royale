@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Poker Rules · Diwali Royale</title>
+<meta property="og:title" content="Poker Rules · Diwali Royale">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Josefin+Sans:wght@700&display=swap">
+<style>
+:root{--night:#170408;--panel:#4a0d1b;--panel-hi:#6b1428;--gold:#d8b259;--gold-hi:#f7e6a6;--text:#f4ead8;--muted:#d8b9a8;--line:rgba(216,178,89,.32);
+  --card:#fbf4e0;--ink:#2a0610;--red:#b3122e;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--night) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill='none' stroke='%23d8b259' stroke-width='1.6' opacity='.16'%3E%3Crect x='3' y='3' width='94' height='94'/%3E%3Cpath d='M3 3 L22 3 L3 22 Z M97 3 L78 3 L97 22 Z M3 97 L22 97 L3 78 Z M97 97 L78 97 L97 78 Z'/%3E%3Ccircle cx='50' cy='31' r='17'/%3E%3Ccircle cx='69' cy='50' r='17'/%3E%3Ccircle cx='50' cy='69' r='17'/%3E%3Ccircle cx='31' cy='50' r='17'/%3E%3Cpath d='M50 14 L86 50 L50 86 L14 50 Z' stroke-width='1'/%3E%3C/g%3E%3Ccircle cx='50' cy='50' r='5' fill='%23d8b259' opacity='.16'/%3E%3C/svg%3E") 0 0/72px 72px;color:var(--text);font-family:"Playfair Display",Georgia,serif;font-size:16px;line-height:1.6;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:24px 48px}
+.wrap{max-width:680px;margin:0 auto;padding:10px;border-radius:18px;background:linear-gradient(110deg,#9c7428,#f2d98c 30%,#c9a04a 55%,#f7e6a6 75%,#9c7428);box-shadow:0 30px 80px -30px #000}
+.in{border-radius:10px;background:radial-gradient(ellipse at 50% 20%,var(--panel-hi),var(--panel) 55%,#2a0610);padding:clamp(28px,7vw,56px) clamp(18px,6vw,48px) 40px;position:relative;overflow:hidden}
+.band{height:56px;margin:-8px -8px 18px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill='none' stroke='%23d8b259' stroke-width='1.6' opacity='1'%3E%3Crect x='3' y='3' width='94' height='94'/%3E%3Cpath d='M3 3 L22 3 L3 22 Z M97 3 L78 3 L97 22 Z M3 97 L22 97 L3 78 Z M97 97 L78 97 L97 78 Z'/%3E%3Ccircle cx='50' cy='31' r='17'/%3E%3Ccircle cx='69' cy='50' r='17'/%3E%3Ccircle cx='50' cy='69' r='17'/%3E%3Ccircle cx='31' cy='50' r='17'/%3E%3Cpath d='M50 14 L86 50 L50 86 L14 50 Z' stroke-width='1'/%3E%3C/g%3E%3Ccircle cx='50' cy='50' r='5' fill='%23d8b259' opacity='1'/%3E%3C/svg%3E") center/56px 56px space}
+header{text-align:center}
+.eyebrow{font-size:13px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin:0}
+h1{font-family:"Josefin Sans",Futura,sans-serif;font-weight:700;font-size:clamp(40px,11vw,64px);letter-spacing:.14em;margin:6px -.14em 0 0;line-height:1;
+  background:linear-gradient(100deg,#b88a2c,#f7e6a6 35%,#d8b259 55%,#fff3c4 70%,#b88a2c);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{font-style:italic;font-size:clamp(20px,5vw,26px);color:var(--gold-hi);margin:6px 0 0}
+h2{font-size:13px;font-weight:400;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);text-align:center;margin:40px 0 16px}
+ol,ul{list-style:none;margin:0;padding:0}
+.hands li{display:grid;grid-template-columns:28px 1fr;gap:4px 12px;padding:12px 0;border-bottom:1px solid rgba(216,178,89,.16);align-items:center}
+.hands li:last-child{border-bottom:0}
+.rk{font-size:22px;color:var(--gold);text-align:center;grid-row:span 2}
+.hn strong{font-weight:500}.hn span{display:block;font-size:14px;color:var(--muted);font-style:italic}
+.cards{display:flex;gap:5px;grid-column:2}
+.cd{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;width:38px;height:52px;border-radius:5px;background:var(--card);color:var(--ink);box-shadow:0 2px 6px rgba(0,0,0,.35);line-height:1}
+.cd b{font-weight:500;font-size:16px}.cd i{font-style:normal;font-size:17px}.cd.r{color:var(--red)}
+.steps{counter-reset:s}
+.steps li{counter-increment:s;display:grid;grid-template-columns:34px 1fr;gap:0 12px;padding:10px 0}
+.steps li::before{content:counter(s);grid-row:span 2;width:30px;height:30px;border-radius:50%;border:1px solid var(--gold);color:var(--gold);display:grid;place-items:center;font-size:15px}
+.steps strong{font-weight:500}.steps span{color:var(--muted);font-size:15px}
+.moves{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 18px;font-size:15px;color:var(--muted)}
+.moves strong{color:var(--gold-hi);font-weight:500}
+.house li{padding:9px 0 9px 26px;position:relative;border-bottom:1px dashed rgba(216,178,89,.18)}
+.house li:last-child{border-bottom:0}
+.house li::before{content:"✦";position:absolute;left:0;color:var(--gold);font-size:13px;top:12px}
+.back{display:block;text-align:center;margin-top:36px;color:var(--gold-hi);text-underline-offset:3px}
+@media (max-width:420px){.cd{width:32px;height:46px}.cd b{font-size:14px}.cd i{font-size:15px}.moves{grid-template-columns:1fr}}
+</style></head><body>
+<main class="wrap"><div class="in">
+<div class="band" aria-hidden="true"></div>
+<header><p class="eyebrow">Diwali Royale · Rouge &amp; Rangoli</p><h1>POKER</h1><p class="sub">House rules for Texas Hold'em</p></header>
+<h2>Hand rankings, best to worst</h2>
+<ol class="hands">
+<li><span class="rk">1</span><div class="hn"><strong>Royal flush</strong><span>Top five of one suit. Unbeatable.</span></div><div class="cards"><span class="cd r"><b>A</b><i>♥</i></span><span class="cd r"><b>K</b><i>♥</i></span><span class="cd r"><b>Q</b><i>♥</i></span><span class="cd r"><b>J</b><i>♥</i></span><span class="cd r"><b>10</b><i>♥</i></span></div></li>
+<li><span class="rk">2</span><div class="hn"><strong>Straight flush</strong><span>Five in a row, same suit.</span></div><div class="cards"><span class="cd"><b>9</b><i>♠</i></span><span class="cd"><b>8</b><i>♠</i></span><span class="cd"><b>7</b><i>♠</i></span><span class="cd"><b>6</b><i>♠</i></span><span class="cd"><b>5</b><i>♠</i></span></div></li>
+<li><span class="rk">3</span><div class="hn"><strong>Four of a kind</strong><span>Four cards of one rank.</span></div><div class="cards"><span class="cd"><b>Q</b><i>♣</i></span><span class="cd r"><b>Q</b><i>♦</i></span><span class="cd r"><b>Q</b><i>♥</i></span><span class="cd"><b>Q</b><i>♠</i></span><span class="cd r"><b>3</b><i>♦</i></span></div></li>
+<li><span class="rk">4</span><div class="hn"><strong>Full house</strong><span>Three of a kind plus a pair.</span></div><div class="cards"><span class="cd"><b>K</b><i>♠</i></span><span class="cd r"><b>K</b><i>♥</i></span><span class="cd r"><b>K</b><i>♦</i></span><span class="cd"><b>7</b><i>♣</i></span><span class="cd r"><b>7</b><i>♥</i></span></div></li>
+<li><span class="rk">5</span><div class="hn"><strong>Flush</strong><span>Any five of one suit.</span></div><div class="cards"><span class="cd r"><b>A</b><i>♦</i></span><span class="cd r"><b>J</b><i>♦</i></span><span class="cd r"><b>8</b><i>♦</i></span><span class="cd r"><b>6</b><i>♦</i></span><span class="cd r"><b>2</b><i>♦</i></span></div></li>
+<li><span class="rk">6</span><div class="hn"><strong>Straight</strong><span>Five in a row, mixed suits.</span></div><div class="cards"><span class="cd"><b>10</b><i>♣</i></span><span class="cd r"><b>9</b><i>♦</i></span><span class="cd"><b>8</b><i>♠</i></span><span class="cd r"><b>7</b><i>♥</i></span><span class="cd"><b>6</b><i>♣</i></span></div></li>
+<li><span class="rk">7</span><div class="hn"><strong>Three of a kind</strong><span>Three cards of one rank.</span></div><div class="cards"><span class="cd r"><b>8</b><i>♥</i></span><span class="cd"><b>8</b><i>♣</i></span><span class="cd"><b>8</b><i>♠</i></span><span class="cd r"><b>K</b><i>♦</i></span><span class="cd"><b>3</b><i>♣</i></span></div></li>
+<li><span class="rk">8</span><div class="hn"><strong>Two pair</strong><span>Two different pairs.</span></div><div class="cards"><span class="cd"><b>J</b><i>♠</i></span><span class="cd r"><b>J</b><i>♦</i></span><span class="cd"><b>4</b><i>♣</i></span><span class="cd r"><b>4</b><i>♥</i></span><span class="cd"><b>A</b><i>♠</i></span></div></li>
+<li><span class="rk">9</span><div class="hn"><strong>One pair</strong><span>Two cards of one rank.</span></div><div class="cards"><span class="cd r"><b>10</b><i>♥</i></span><span class="cd"><b>10</b><i>♠</i></span><span class="cd"><b>K</b><i>♣</i></span><span class="cd r"><b>7</b><i>♦</i></span><span class="cd"><b>4</b><i>♠</i></span></div></li>
+<li><span class="rk">10</span><div class="hn"><strong>High card</strong><span>Nothing else? Highest card wins.</span></div><div class="cards"><span class="cd"><b>A</b><i>♣</i></span><span class="cd r"><b>J</b><i>♦</i></span><span class="cd"><b>8</b><i>♠</i></span><span class="cd r"><b>6</b><i>♥</i></span><span class="cd"><b>3</b><i>♣</i></span></div></li>
+</ol>
+<h2>How a hand plays</h2>
+<ol class="steps">
+<li><strong>Blinds</strong><span>The two players left of the dealer put in the small and big blind, so there's always something to win.</span></li>
+<li><strong>The deal</strong><span>Everyone gets two private cards. First round of betting.</span></li>
+<li><strong>The flop</strong><span>Three shared cards go face up in the middle. Betting round.</span></li>
+<li><strong>The turn</strong><span>A fourth shared card. Betting round.</span></li>
+<li><strong>The river</strong><span>The fifth and final shared card. Last betting round.</span></li>
+<li><strong>Showdown</strong><span>Make your best five-card hand from your two cards and the five shared ones. Best hand takes the pot.</span></li>
+</ol>
+<h2>Your moves</h2>
+<ul class="moves">
+<li><strong>Check</strong> pass, if no one has bet</li>
+<li><strong>Bet</strong> put chips in</li>
+<li><strong>Call</strong> match the bet</li>
+<li><strong>Raise</strong> bet more</li>
+<li><strong>Fold</strong> give up the hand</li>
+<li><strong>All in</strong> everything on the line</li>
+</ul>
+<h2>House rules</h2>
+<ul class="house">
+<li>€10 buy-in. Everyone starts with the same stack of chips.</li>
+<li>The dealer button moves one seat left after every hand.</li>
+<li>Blinds double every 30 minutes, so the game keeps moving.</li>
+<li>Lose all your chips and you're out. Bring snacks to the survivors.</li>
+<li>Last player with chips takes the whole pot.</li>
+<li>Tied hands split the pot.</li>
+<li>Nihar's rulings are final. Even when they're wrong.</li>
+</ul>
+<a class="back" href="./">Back to the invitation</a>
+</div></main>
+</body></html>
