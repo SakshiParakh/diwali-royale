@@ -445,7 +445,7 @@ footer{position:relative;z-index:2;text-align:center;margin-top:26px;font-family
     const tv=['t1','t2','t3'].map(i=>document.getElementById(i).value.trim());
     if(yes&&tv.some(Boolean))t+='\n\nTwo lies and a truth:\nTruth: '+(tv[0]||'?')+'\nLie: '+(tv[1]||'?')+'\nLie: '+(tv[2]||'?');
     return t;}
-  function refresh(){const y=document.getElementById('r-yes').checked;document.getElementById('gcal').hidden=!y;document.getElementById('ttl').hidden=!y;const t=msg();wa.href='https://wa.me/31638071561?text='+encodeURIComponent(t);}
+  function refresh(){const y=document.getElementById('r-yes').checked;document.getElementById('gcal').hidden=!y;document.getElementById('ttl').hidden=!y;song.closest('.field').hidden=!y;document.getElementById('drink-l').closest('.field').hidden=!y;document.getElementById('copy').hidden=!y;const t=msg();wa.href='https://wa.me/31638071561?text='+encodeURIComponent(t);}
   document.querySelectorAll('input').forEach(i=>i.addEventListener('input',refresh));refresh();
   document.getElementById('copy').addEventListener('click',()=>{const t=msg();
     const fb=()=>{note.textContent='Copy this and send it to Nihar on WhatsApp (+31 6 38071561): '+t;};
