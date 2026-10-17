@@ -304,7 +304,7 @@ footer{position:relative;z-index:2;text-align:center;margin-top:26px;font-family
       </fieldset>
       <div class="field"><span class="flabel" id="drink-l">Your drinks of choice (pick as many as you like)</span><div class="choice small" role="group" aria-labelledby="drink-l"><input type="checkbox" name="drink" id="d-0" value="Wine"><label for="d-0">Wine</label><input type="checkbox" name="drink" id="d-1" value="Beer"><label for="d-1">Beer</label><input type="checkbox" name="drink" id="d-2" value="Whiskey"><label for="d-2">Whiskey</label><input type="checkbox" name="drink" id="d-3" value="Rum"><label for="d-3">Rum</label><input type="checkbox" name="drink" id="d-4" value="Vodka"><label for="d-4">Vodka</label><input type="checkbox" name="drink" id="d-5" value="Stelz"><label for="d-5">Stelz</label><input type="checkbox" name="drink" id="d-6" value="And for some special people: tap water"><label for="d-6">And for some special people: tap water</label></div></div>
       <div class="actions">
-        <a class="btn primary" id="wa" href="#" target="_blank" rel="noopener">Send reply on WhatsApp</a>
+        <a class="btn primary" id="wa" href="#" target="_blank" rel="noopener">Send reply to Nihar</a>
         <button class="btn ghost" id="copy" type="button">Copy reply</button>
       </div>
       <a class="btn ghost cal" id="gcal" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Diwali+Royale+%C2%B7+Rouge+%26+Rangoli&amp;dates=20261107T190000%2F20261108T010000&amp;ctz=Europe%2FAmsterdam&amp;location=Nachtwachtlaan+404%2C+Amsterdam&amp;details=Sakshi+%26+Nihar%27s+Diwali+party%3A+diyas%2C+housie%2C+pav+bhaji%2C+poker+and+dancing.%0ADress+code%3A+every+shade+of+red%2C+with+gold.%0ABring+your+energy%2C+and+a+starter+or+dessert+to+share.%0AInvite%3A+https%3A%2F%2Ftinyurl.com%2FDiwaliRoyale26" target="_blank" rel="noopener">Add to Google Calendar</a>
@@ -445,11 +445,11 @@ footer{position:relative;z-index:2;text-align:center;margin-top:26px;font-family
     const tv=['t1','t2','t3'].map(i=>document.getElementById(i).value.trim());
     if(yes&&tv.some(Boolean))t+='\n\nTwo lies and a truth:\nTruth: '+(tv[0]||'?')+'\nLie: '+(tv[1]||'?')+'\nLie: '+(tv[2]||'?');
     return t;}
-  function refresh(){const y=document.getElementById('r-yes').checked;document.getElementById('gcal').hidden=!y;document.getElementById('ttl').hidden=!y;const t=msg();wa.href='https://wa.me/?text='+encodeURIComponent(t);}
+  function refresh(){const y=document.getElementById('r-yes').checked;document.getElementById('gcal').hidden=!y;document.getElementById('ttl').hidden=!y;const t=msg();wa.href='https://wa.me/31638071561?text='+encodeURIComponent(t);}
   document.querySelectorAll('input').forEach(i=>i.addEventListener('input',refresh));refresh();
   document.getElementById('copy').addEventListener('click',()=>{const t=msg();
-    const fb=()=>{note.textContent='Copy this and send it to Sakshi or Nihar: '+t;};
-    try{navigator.clipboard.writeText(t).then(()=>{note.textContent='Copied. Paste it in a message to Sakshi or Nihar.';},fb);}catch(e){fb();}});
+    const fb=()=>{note.textContent='Copy this and send it to Nihar on WhatsApp (+31 6 38071561): '+t;};
+    try{navigator.clipboard.writeText(t).then(()=>{note.textContent='Copied. Paste it in a WhatsApp message to Nihar (+31 6 38071561).';},fb);}catch(e){fb();}});
 
   /* ---------- puzzle reveal: the date and venue assemble themselves like a jigsaw ---------- */
   (function(){
