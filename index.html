@@ -186,6 +186,8 @@ footer{position:relative;z-index:2;text-align:center;margin-top:26px;font-family
 .panel-in::before,.panel-in::after,.lc,#mandala2{display:none}
 #mandala{top:-8%;opacity:.4}
 .diyas{margin-bottom:0}
+.facts.maps-only{border:0;margin-top:-14px}
+.facts.maps-only .fact.full{padding:0}
 .puzzle-sec{gap:12px}
 [hidden]{display:none!important}
 .pz-hint{margin:0;color:var(--muted);max-width:34ch}
@@ -243,15 +245,13 @@ footer{position:relative;z-index:2;text-align:center;margin-top:26px;font-family
       <span class="hint">Tap to light the diya</span>
     </button>
 
-    <section class="puzzle-sec done" id="puzzle">
+    <section class="puzzle-sec" id="puzzle">
       <h2>When &amp; where?</h2>
       <p class="pz-hint" id="pz-note">Piecing it together…</p>
       <div class="board" id="board" role="group" aria-label="Invitation puzzle"></div>
     </section>
 
-    <div class="facts" id="facts">
-      <div class="fact"><span class="label">When</span><span class="val">Sat 7 November<small>2026 · from 7:00 PM</small></span></div>
-      <div class="fact"><span class="label">Where</span><span class="val">Nachtwachtlaan 404<small>Amsterdam</small></span></div>
+    <div class="facts maps-only" id="facts">
       <div class="fact full"><a href="https://www.google.com/maps/search/?api=1&amp;query=Nachtwachtlaan%20404%2C%20Amsterdam" target="_blank" rel="noopener">Open in Maps</a></div>
     </div>
 
@@ -436,7 +436,7 @@ footer{position:relative;z-index:2;text-align:center;margin-top:26px;font-family
       for(let i=0;i<N*N;i++){const d=document.createElement('div');d.className='pc';d.setAttribute('aria-hidden','true');
         d.style.backgroundImage='url('+img+')';d.style.backgroundPosition=(i%N)*50+'% '+Math.floor(i/N)*50+'%';board.appendChild(d);pcs.push(d);}
       if(reduced){finish(false);return;}
-      watch();}
+      scatter();watch();}
     function scatter(){pcs.forEach(d=>{d.style.transition='none';
       const dx=(Math.random()-.5)*260,dy=(Math.random()-.5)*300,r=(Math.random()-.5)*70;
       d.style.transform='translate('+dx+'px,'+dy+'px) rotate('+r+'deg) scale(.8)';d.style.opacity='0';});
