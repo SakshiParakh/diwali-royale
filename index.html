@@ -231,7 +231,7 @@ footer{position:relative;z-index:2;text-align:center;margin-top:26px;font-family
 
     <svg class="orn" viewBox="0 0 300 22" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1"><path d="M0 11 H118"/><path d="M182 11 H300"/><path d="M150 3 C156 8 156 15 150 20 C144 15 144 8 150 3 Z M150 20 C142 18 136 13 135 7 C142 9 147 14 150 20 Z M150 20 C158 18 164 13 165 7 C158 9 153 14 150 20 Z" fill="currentColor"/><circle cx="130" cy="11" r="3"/><circle cx="170" cy="11" r="3"/><circle cx="122" cy="11" r="1.4" fill="currentColor"/><circle cx="178" cy="11" r="1.4" fill="currentColor"/></g></svg>
 
-    <div class="theme"><span class="t">The theme</span><span class="n foil">Rouge &amp; Rangoli</span><span class="tr tag">Where bold elegance meets timeless tradition.</span></div>
+    <div class="theme"><span class="t">The theme</span><span class="n foil">Rouge &amp; Rangoli</span></div>
 
     <button class="diya-btn" id="light" type="button" aria-label="Light the diya">
       <span class="diya">
@@ -463,12 +463,12 @@ footer{position:relative;z-index:2;text-align:center;margin-top:26px;font-family
     function scatter(){pcs.forEach(d=>{d.style.transition='none';
       const dx=(Math.random()-.5)*260,dy=(Math.random()-.5)*300,r=(Math.random()-.5)*70;
       d.style.transform='translate('+dx+'px,'+dy+'px) rotate('+r+'deg) scale(.8)';d.style.opacity='0';});
-      sec.classList.remove('done');note.textContent='Piecing it together…';void board.offsetWidth;}
+      sec.classList.remove('done');note.hidden=false;note.textContent='Piecing it together…';void board.offsetWidth;}
     function play(){played=true;scatter();
       const seq=[...pcs.keys()].sort(()=>Math.random()-.5);
       seq.forEach((i,k)=>{const d=pcs[i];setTimeout(()=>{d.style.transition='';d.style.transform='none';d.style.opacity='1';},250+k*230);});
       setTimeout(()=>finish(true),250+seq.length*230+1000);}
-    function finish(celebrate){pcs.forEach(d=>{d.style.transform='scale(1.02)';d.style.opacity='1';});sec.classList.add('done');note.textContent='See you there.';
+    function finish(celebrate){pcs.forEach(d=>{d.style.transform='scale(1.02)';d.style.opacity='1';});sec.classList.add('done');note.hidden=true;
       if(celebrate&&!reduced){const r=board.getBoundingClientRect();burst({x:r.left+r.width/2,y:r.top+r.height/2});}}
     function watch(){
       if(!('IntersectionObserver' in window)){play();return;}
