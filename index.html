@@ -157,6 +157,7 @@ section{width:100%;display:flex;flex-direction:column;align-items:center;gap:14p
 .ttl{border:1px dashed var(--line);border-radius:12px;padding:14px 14px 16px;margin:0;width:100%;max-width:380px;display:flex;flex-direction:column;gap:12px;text-align:left}
 .ttl legend{padding:0 8px}
 .field input.need{border-color:#e5648f;box-shadow:0 0 0 2px rgba(229,100,143,.35)}
+.hintline{font-size:13px;font-style:italic;color:var(--muted)}
 .ttl-note{margin:0;font-size:14px;color:var(--muted);font-style:italic}
 .flabel{font-family:var(--caps);font-size:11px;letter-spacing:.22em;color:var(--gold)}
 .choice.small{justify-content:flex-start;gap:8px}
@@ -298,6 +299,7 @@ footer{position:relative;z-index:2;text-align:center;margin-top:26px;font-family
       </div>
       <div class="field"><label for="r-name">Your name</label><input id="r-name" autocomplete="name" placeholder="Your name"></div>
       <div class="field"><label for="r-song">One song for the dance floor</label><input id="r-song" required aria-required="true" placeholder="e.g. London Thumakda"></div>
+      <div class="field" id="pred-f"><label for="r-pred">Predict Nihar's first housie number</label><input id="r-pred" type="number" inputmode="numeric" min="1" max="90" step="1" required aria-required="true" placeholder="A number from 1 to 90"><span class="hintline">Guess it exactly and win a bonus prize. Or at least bragging rights.</span></div>
       <fieldset class="ttl" id="ttl">
         <legend class="flabel">Two lies and a truth</legend>
         <p class="ttl-note">Nihar will read them out between games, and everyone guesses the truth. All three are required. Keep it juicy.</p>
@@ -445,15 +447,16 @@ footer{position:relative;z-index:2;text-align:center;margin-top:26px;font-family
     const dr=[...document.querySelectorAll('input[name=drink]:checked')].map(i=>i.value.replace('And for some special people: ',''));
     if(yes&&dr.length)t+='\nDrinks: '+dr.join(', ');
     if(yes&&song.value.trim())t+='\nSong request: '+song.value.trim();
+    const pv=document.getElementById('r-pred').value.trim();if(yes&&pv)t+="\nNihar's first number: "+pv;
     const tv=['t1','t2','t3'].map(i=>document.getElementById(i).value.trim());
     if(yes&&tv.some(Boolean))t+='\n\nTwo lies and a truth:\nTruth: '+(tv[0]||'?')+'\nLie: '+(tv[1]||'?')+'\nLie: '+(tv[2]||'?');
     return t;}
-  function refresh(){const y=document.getElementById('r-yes').checked;document.getElementById('gcal').hidden=!y;document.getElementById('ttl').hidden=!y;song.closest('.field').hidden=!y;document.getElementById('drink-l').closest('.field').hidden=!y;document.getElementById('copy').hidden=!y;const t=msg();wa.href='https://wa.me/31638071561?text='+encodeURIComponent(t);}
+  function refresh(){const y=document.getElementById('r-yes').checked;document.getElementById('gcal').hidden=!y;document.getElementById('ttl').hidden=!y;document.getElementById('pred-f').hidden=!y;song.closest('.field').hidden=!y;document.getElementById('drink-l').closest('.field').hidden=!y;document.getElementById('copy').hidden=!y;const t=msg();wa.href='https://wa.me/31638071561?text='+encodeURIComponent(t);}
   document.querySelectorAll('input').forEach(i=>i.addEventListener('input',refresh));refresh();
-  function missing(){if(!document.getElementById('r-yes').checked)return [];return ['r-song','t1','t2','t3'].map(i=>document.getElementById(i)).filter(e=>!e.value.trim());}
+  function missing(){if(!document.getElementById('r-yes').checked)return [];const pe=document.getElementById('r-pred'),pn=Number(pe.value);return ['r-song','t1','t2','t3'].map(i=>document.getElementById(i)).filter(e=>!e.value.trim()).concat(Number.isInteger(pn)&&pn>=1&&pn<=90&&pe.value.trim()?[]:[pe]);}
   function blocked(){const m=missing();if(!m.length)return false;m.forEach(x=>x.classList.add('need'));m[0].focus();
-    note.textContent=m.some(x=>x.id==='r-song')&&m.length===1?'Please add a song for the dance floor first.':m.some(x=>x.id==='r-song')?'Please add your song, your truth and both lies first. Nihar is counting on you.':'Please fill in your truth and both lies first. Nihar is counting on you.';return true;}
-  ['r-song','t1','t2','t3'].forEach(i=>document.getElementById(i).addEventListener('input',e=>{if(e.target.value.trim())e.target.classList.remove('need');if(!missing().length)note.textContent='';}));
+    note.textContent=m.length===1&&m[0].id==='r-pred'?'Please predict a number from 1 to 90 first.':m.length===1&&m[0].id==='r-song'?'Please add a song for the dance floor first.':'Please fill in the highlighted fields first. Nihar is counting on you.';return true;}
+  ['r-song','r-pred','t1','t2','t3'].forEach(i=>document.getElementById(i).addEventListener('input',e=>{if(e.target.value.trim())e.target.classList.remove('need');if(!missing().length)note.textContent='';}));
   wa.addEventListener('click',e=>{if(blocked())e.preventDefault();});
   document.getElementById('copy').addEventListener('click',()=>{if(blocked())return;const t=msg();
     const fb=()=>{note.textContent='Copy this and send it to Nihar on WhatsApp (+31 6 38071561): '+t;};
