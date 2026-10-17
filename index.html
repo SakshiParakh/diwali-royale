@@ -156,6 +156,7 @@ section{width:100%;display:flex;flex-direction:column;align-items:center;gap:14p
 .field input:focus{outline:2px solid rgba(216,178,89,.45);border-color:var(--gold)}
 .ttl{border:1px dashed var(--line);border-radius:12px;padding:14px 14px 16px;margin:0;width:100%;max-width:380px;display:flex;flex-direction:column;gap:12px;text-align:left}
 .ttl legend{padding:0 8px}
+.field input.need{border-color:#e5648f;box-shadow:0 0 0 2px rgba(229,100,143,.35)}
 .ttl-note{margin:0;font-size:14px;color:var(--muted);font-style:italic}
 .flabel{font-family:var(--caps);font-size:11px;letter-spacing:.22em;color:var(--gold)}
 .choice.small{justify-content:flex-start;gap:8px}
@@ -299,10 +300,10 @@ footer{position:relative;z-index:2;text-align:center;margin-top:26px;font-family
       <div class="field"><label for="r-song">One song for the dance floor</label><input id="r-song" placeholder="e.g. London Thumakda"></div>
       <fieldset class="ttl" id="ttl">
         <legend class="flabel">Two lies and a truth</legend>
-        <p class="ttl-note">Nihar will read them out between games, and everyone guesses the truth. Keep it juicy.</p>
-        <div class="field"><label for="t1">The truth</label><input id="t1" placeholder="e.g. I once met Shah Rukh Khan"></div>
-        <div class="field"><label for="t2">A lie</label><input id="t2" placeholder="e.g. I've never lost at poker"></div>
-        <div class="field"><label for="t3">Another lie</label><input id="t3" placeholder="e.g. I can sing every Bollywood song"></div>
+        <p class="ttl-note">Nihar will read them out between games, and everyone guesses the truth. All three are required. Keep it juicy.</p>
+        <div class="field"><label for="t1">The truth</label><input id="t1" required aria-required="true" placeholder="e.g. I once met Shah Rukh Khan"></div>
+        <div class="field"><label for="t2">A lie</label><input id="t2" required aria-required="true" placeholder="e.g. I've never lost at poker"></div>
+        <div class="field"><label for="t3">Another lie</label><input id="t3" required aria-required="true" placeholder="e.g. I can sing every Bollywood song"></div>
       </fieldset>
       <div class="field"><span class="flabel" id="drink-l">Your drinks of choice (pick as many as you like)</span><div class="choice small" role="group" aria-labelledby="drink-l"><input type="checkbox" name="drink" id="d-0" value="Wine"><label for="d-0">Wine</label><input type="checkbox" name="drink" id="d-1" value="Beer"><label for="d-1">Beer</label><input type="checkbox" name="drink" id="d-2" value="Whiskey"><label for="d-2">Whiskey</label><input type="checkbox" name="drink" id="d-3" value="Rum"><label for="d-3">Rum</label><input type="checkbox" name="drink" id="d-4" value="Vodka"><label for="d-4">Vodka</label><input type="checkbox" name="drink" id="d-5" value="Stelz"><label for="d-5">Stelz</label><input type="checkbox" name="drink" id="d-6" value="And for some special people: tap water"><label for="d-6">And for some special people: tap water</label></div></div>
       <div class="actions">
@@ -449,7 +450,12 @@ footer{position:relative;z-index:2;text-align:center;margin-top:26px;font-family
     return t;}
   function refresh(){const y=document.getElementById('r-yes').checked;document.getElementById('gcal').hidden=!y;document.getElementById('ttl').hidden=!y;song.closest('.field').hidden=!y;document.getElementById('drink-l').closest('.field').hidden=!y;document.getElementById('copy').hidden=!y;const t=msg();wa.href='https://wa.me/31638071561?text='+encodeURIComponent(t);}
   document.querySelectorAll('input').forEach(i=>i.addEventListener('input',refresh));refresh();
-  document.getElementById('copy').addEventListener('click',()=>{const t=msg();
+  function missing(){if(!document.getElementById('r-yes').checked)return [];return ['t1','t2','t3'].map(i=>document.getElementById(i)).filter(e=>!e.value.trim());}
+  function blocked(){const m=missing();if(!m.length)return false;m.forEach(x=>x.classList.add('need'));m[0].focus();
+    note.textContent='Please fill in your truth and both lies first. Nihar is counting on you.';return true;}
+  ['t1','t2','t3'].forEach(i=>document.getElementById(i).addEventListener('input',e=>{if(e.target.value.trim())e.target.classList.remove('need');if(!missing().length)note.textContent='';}));
+  wa.addEventListener('click',e=>{if(blocked())e.preventDefault();});
+  document.getElementById('copy').addEventListener('click',()=>{if(blocked())return;const t=msg();
     const fb=()=>{note.textContent='Copy this and send it to Nihar on WhatsApp (+31 6 38071561): '+t;};
     try{navigator.clipboard.writeText(t).then(()=>{note.textContent='Copied. Paste it in a WhatsApp message to Nihar (+31 6 38071561).';},fb);}catch(e){fb();}});
 
